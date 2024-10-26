@@ -17,20 +17,22 @@ end = []
 for x in range(height):
     line = []
     for y in range(width):
-        pixel = int(img[x, y])
-        if pixel == black:
+        pixel = (img[x, y])
+        if np.array_equal(pixel,black):
             line.append(1)
-        elif pixel == white:
+        elif np.array_equal(pixel,white):
             line.append(0)
-        elif pixel == green:
+        elif np.array_equal(pixel,green):
             line.append(2)
-            start.append(x,y)
-        elif pixel == red:
+            start.append(x)
+            start.append(y)
+        elif np.array_equal(pixel,red):
             line.append(3)
-            end.append(x,y)
+            end.append(x)
+            end.append(y)
     map.append(line)
 
-np.save("MAP1array.npy")
+np.save("MAP1array.npy", map)
 
 with open('positions.txt', 'w') as f:
     f.write(f"{start[0]} {start[1]}\n")
