@@ -5,6 +5,7 @@
 #include <queue>
 #include <set>
 
+
 void load_map(const std::string& filename, std::vector<std::vector<int>>& map) {
     // Load the numpy array from file
     auto arr = cnpy::npy_load(filename);
@@ -92,6 +93,7 @@ int bfs(std::pair<int,int> start, std::pair<int,int> end, std::vector<std::vecto
 }
 
 int main() {
+    std::cout<<"hello";
     // Load the map
     std::vector<std::vector<int>> map;
     load_map("MAP1array", map);
@@ -102,5 +104,7 @@ int main() {
 
     int steps = bfs(start, end, map);
 
-    return steps;
+    std::cout << steps;
+
+    return 0;
 }
