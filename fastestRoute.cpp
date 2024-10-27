@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include "cnpy.h"
+#include "cnpy/cnpy.h"
 #include <queue>
 #include <set>
 
@@ -27,6 +27,33 @@ std::pair<int, int> load_position(const std::string& filename) {
     int y, x;
     file >> y >> x;  // Read y and x coordinates
     return {x, y};
+}
+
+std::queue<std::pair<int,int>> directions(std::vector<std::vector<int>> map, std::pair<int,int> point) {
+    std::queue<std::pair<int,int>> direction;
+
+    if(point.second - 1 >= 0){
+        if(map[point.first][point.second-1] == 0){
+            direction.push({point.first,point.second-1});
+        }
+    }
+    if(point.first - 1 >= 0){
+        if(map[point.first-1][point.second] == 0){
+            direction.push({point.first,point.second-1});
+        }
+    }
+    if(point.second + 1 < map.size()){
+        if(map[point.first][point.second+1] == 0){
+            direction.push({point.first,point.second-1});
+        }
+    }
+    if(point.first + 1 < map[0].size()){
+        if(map[point.first+1][point.second] == 0){
+            direction.push({point.first,point.second-1});
+        }
+    }
+
+    return direction;
 }
 
 int bfs(std::pair<int,int> start, std::pair<int,int> end, std::vector<std::vector<int>> map) {
@@ -62,33 +89,6 @@ int bfs(std::pair<int,int> start, std::pair<int,int> end, std::vector<std::vecto
     }
 
     return counter;
-}
-
-std::queue<std::pair<int,int>> directions(std::vector<std::vector<int>> map, std::pair<int,int> point) {
-    std::queue<std::pair<int,int>> direction;
-
-    if(point.second - 1 >= 0){
-        if(map[point.first][point.second-1] == 0){
-            direction.push({point.first,point.second-1});
-        }
-    }
-    if(point.first - 1 >= 0){
-        if(map[point.first-1][point.second] == 0){
-            direction.push({point.first,point.second-1});
-        }
-    }
-    if(point.second + 1 < map.size()){
-        if(map[point.first][point.second+1] == 0){
-            direction.push({point.first,point.second-1});
-        }
-    }
-    if(point.first + 1 < map[0].size()){
-        if(map[point.first+1][point.second] == 0){
-            direction.push({point.first,point.second-1});
-        }
-    }
-
-    return direction;
 }
 
 int main() {
