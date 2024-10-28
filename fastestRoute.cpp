@@ -6,6 +6,12 @@
 #include <set>
 
 
+std::pair<int, int> load_position(std::ifstream &file) {
+    int y, x;
+    file >> y >> x;
+    return {y, x};
+}
+
 void load_map(const std::string& filename, std::vector<std::vector<int>>& map) {
     // Load the numpy array from file
     auto arr = cnpy::npy_load(filename);
@@ -93,14 +99,16 @@ int bfs(std::pair<int,int> start, std::pair<int,int> end, std::vector<std::vecto
 }
 
 int main() {
-    std::cout<<"hello";
     // Load the map
     std::vector<std::vector<int>> map;
-    load_map("MAP1array", map);
+    load_map("MAP1array.npy", map);
     
     // Load start and end positions
     auto start = load_position("positions.txt");
     auto end = load_position("positions.txt");
+    std::cout << start.first << " " << start.second << std::endl;
+    std::cout << end.first << " " << end.second << std::endl;
+
 
     int steps = bfs(start, end, map);
 

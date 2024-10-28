@@ -1,5 +1,5 @@
 ---
 triple:          'arm64-apple-darwin'
-binary-path:     '/Users/aaronshao/Desktop/Github Repos/Map-Navigator/test'
+binary-path:     test
 relocations:     []
 ...
